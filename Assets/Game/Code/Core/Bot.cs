@@ -26,8 +26,7 @@ namespace Game.Code.Core
         {
             if (_generatedNumbers.Count >= (_max - _min + 1))
             {
-                _generatedNumbers.TryGetValue(_random.Next(_min, _max), out var result);
-                return result;
+                _generatedNumbers.Clear();
             }
 
             int number;
