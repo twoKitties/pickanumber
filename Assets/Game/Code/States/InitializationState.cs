@@ -1,4 +1,6 @@
-﻿using Game.Code.Core;
+﻿using System;
+using Game.Code.Core;
+using Game.Code.Models;
 using Game.Code.Presenters;
 using Game.Code.Services;
 using Game.Code.Views;
@@ -26,6 +28,18 @@ namespace Game.Code.States
         {
             await _resourceProvider.Initialize();
             _sceneLoader.LoadSceneAsync("Game", OnLoaded);
+            
+            var random = new Random(UnityEngine.Random.Range(-100, 100));
+            var max = 9;
+            var gameStateModel = new GameStateModel(random, max);
+            var inputModel = new InputModel(gameStateModel.Max);
+            var playersModel = new DataFactory().CreatePlayers();
+            
+            var resourceProvider = new ResourceProvider();
+            var uiFactory = new UIFactory(resourceProvider);
+            var presenterService = new PresenterProvider(uiFactory, inputModel);
+            
+            //ServiceLocator.Register();
         }
 
         public void Exit()

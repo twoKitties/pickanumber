@@ -9,31 +9,34 @@ namespace Game.Code.States
     public class OpponentInputState : IPayloadedState<PlayerData>
     {
         private readonly StateMachine _stateMachine;
-        private readonly PresenterService _presenterService;
+        private readonly PresenterProvider _presenterProvider;
+        private readonly GameStateModel _gameStateModel;
         private readonly Bot _bot;
         private readonly InputModel _inputModel;
         private readonly Random _random;
 
-        public OpponentInputState(StateMachine stateMachine, PresenterService presenterService, Bot bot, InputModel inputModel)
+        public OpponentInputState(StateMachine stateMachine, PresenterProvider presenterProvider, GameStateModel gameStateModel, InputModel inputModel)
         {
             _stateMachine = stateMachine;
-            _presenterService = presenterService;
-            _bot = bot;
+            _presenterProvider = presenterProvider;
+            _gameStateModel = gameStateModel;
+            //TODO reset bot on restart
+            _bot = new Bot(gameStateModel);
             _inputModel = inputModel;
         }
         
         public void Enter(PlayerData playerData)
         {
-            _presenterService.TurnStatusPresenter.EnableView();
-            _presenterService.TurnStatusPresenter.SetText($"{playerData.Name}'S TURN");
-            _presenterService.GuessPresenter.SetText("");
+            _presenterProvider.TurnStatusPresenter.EnableView();
+            _presenterProvider.TurnStatusPresenter.SetText($"{playerData.Name}'S TURN");
+            _presenterProvider.GuessPresenter.SetText("");
             
             Sequence.Create()
                 .Chain(Tween.Delay(1f, () =>
                     {
                         var guess = _bot.GetNumber();
                         _inputModel.Value = guess;
-                        _presenterService.GuessPresenter.SetText(guess.ToString());
+                        _presenterProvider.GuessPresenter.SetText(guess.ToString());
                     }))
                 .ChainDelay(1f)
                 .ChainCallback(() => _stateMachine.EnterState<CheckInputState, PlayerData>(playerData));
@@ -41,7 +44,7 @@ namespace Game.Code.States
 
         public void Exit()
         {
-            _presenterService.TurnStatusPresenter.DisableView();
+            _presenterProvider.TurnStatusPresenter.DisableView();
         }
     }
 }

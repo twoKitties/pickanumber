@@ -6,19 +6,19 @@ namespace Game.Code.States
     public class SelectPlayerState : IState
     {
         private readonly StateMachine _stateMachine;
-        private readonly PlayersModel _playersModel;
+        private readonly PlayerModel _playerModel;
         private int _playerIndex;
 
-        public SelectPlayerState(StateMachine stateMachine, PlayersModel playersModel)
+        public SelectPlayerState(StateMachine stateMachine, PlayerModel playerModel)
         {
             _stateMachine = stateMachine;
-            _playersModel = playersModel;
+            _playerModel = playerModel;
         }
         
         public void Enter()
         {
-            _playerIndex = _playersModel.ActivePlayerIndex;
-            var playerData = _playersModel.Data[_playerIndex];
+            _playerIndex = _playerModel.ActivePlayerIndex;
+            var playerData = _playerModel.Data[_playerIndex];
             
             if (playerData.IsLocal)
             {
@@ -33,12 +33,12 @@ namespace Game.Code.States
         public void Exit()
         {
             _playerIndex++;
-            if (_playerIndex > _playersModel.Count - 1)
+            if (_playerIndex > _playerModel.Count - 1)
             {
                 _playerIndex = 0;
             }
             
-            _playersModel.ActivePlayerIndex = _playerIndex;
+            _playerModel.ActivePlayerIndex = _playerIndex;
         }
     }
 }

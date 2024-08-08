@@ -1,10 +1,10 @@
 ﻿namespace Game.Code.Services
 {
-    public class PlayerFactory : IService
+    public class DataFactory : IService
     {
-        public PlayersModel Create()
+        public PlayerModel CreatePlayers()
         {
-            return new PlayersModel()
+            return new PlayerModel()
             {
                 Data = new []
                 {
@@ -27,7 +27,7 @@
         }
     }
 
-    public class PlayersModel
+    public class PlayerModel
     {
         public int Count => Data.Length;
         public PlayerData[] Data;

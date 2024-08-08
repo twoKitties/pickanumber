@@ -14,29 +14,24 @@ namespace Game.Code.Core
 
         public StateMachine(LoadingView loadingView)
         {
-            var random = new Random(UnityEngine.Random.Range(-100, 100));
-            var max = 9;
-            var gameStateModel = new GameStateModel(random, max);
-            var inputModel = new InputModel(gameStateModel.Max);
-            
+            var random = new Random(UnityEngine.Random.Range(0, 100));
+            const int max = 9;
             var resourceProvider = new ResourceProvider();
             var uiFactory = new UIFactory(resourceProvider);
-            var playerFactory = new PlayerFactory();
-            var playersModel = playerFactory.Create();
-            var presenterService = new PresenterService(uiFactory, inputModel);
-            
+
+
+            var modelProvider = new ModelProvider(random, max);
+            var presenterService = new PresenterProvider(uiFactory, modelProvider.InputModel);
+
             _states = new Dictionary<Type, IExitableState>
             {
-                [typeof(InitializationState)] = new InitializationState(this, 
-                    new SceneLoader(resourceProvider), 
-                    resourceProvider, 
-                    loadingView),
+                [typeof(InitializationState)] = new InitializationState(this, new SceneLoader(resourceProvider), resourceProvider, loadingView),
                 [typeof(SessionInitializationState)] = new SessionInitializationState(this, presenterService),
-                [typeof(PickingNumberState)] = new PickingNumberState(this, gameStateModel, presenterService),
-                [typeof(SelectPlayerState)] = new SelectPlayerState(this, playersModel),
+                [typeof(PickingNumberState)] = new PickingNumberState(this, modelProvider.GameStateModel, presenterService),
+                [typeof(SelectPlayerState)] = new SelectPlayerState(this, modelProvider.PlayerModel),
                 [typeof(PlayerInputState)] = new PlayerInputState(this, presenterService),
-                [typeof(OpponentInputState)] = new OpponentInputState(this, presenterService, new Bot(0, max, gameStateModel), inputModel),
-                [typeof(CheckInputState)] = new CheckInputState(this, presenterService, gameStateModel, inputModel),
+                [typeof(OpponentInputState)] = new OpponentInputState(this, presenterService, modelProvider.GameStateModel, modelProvider.InputModel),
+                [typeof(CheckInputState)] = new CheckInputState(this, presenterService, modelProvider.GameStateModel, modelProvider.InputModel),
                 [typeof(EndGameState)] = new EndGameState(this, presenterService)
             };
         }

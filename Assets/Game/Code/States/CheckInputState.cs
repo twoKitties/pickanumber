@@ -9,30 +9,30 @@ namespace Game.Code.States
     public class CheckInputState : IPayloadedState<PlayerData>
     {
         private readonly StateMachine _stateMachine;
-        private readonly PresenterService _presenterService;
+        private readonly PresenterProvider _presenterProvider;
         private readonly GameStateModel _gameStateModel;
         private readonly InputModel _inputModel;
 
-        public CheckInputState(StateMachine stateMachine, PresenterService presenterService, GameStateModel gameStateModel, InputModel inputModel)
+        public CheckInputState(StateMachine stateMachine, PresenterProvider presenterProvider, GameStateModel gameStateModel, InputModel inputModel)
         {
             _stateMachine = stateMachine;
-            _presenterService = presenterService;
+            _presenterProvider = presenterProvider;
             _gameStateModel = gameStateModel;
             _inputModel = inputModel;
         }
 
         public void Enter(PlayerData playerData)
         {
-            _presenterService.InfoPresenter.EnableView();
-            _presenterService.TurnStatusPresenter.EnableView();
-            _presenterService.TurnStatusPresenter.SetText("CHECKING");
+            _presenterProvider.InfoPresenter.EnableView();
+            _presenterProvider.TurnStatusPresenter.EnableView();
+            _presenterProvider.TurnStatusPresenter.SetText("CHECKING");
             CheckWinCondition(playerData);
         }
 
         public void Exit()
         {
-            _presenterService.InfoPresenter.DisableView();
-            _presenterService.GuessPresenter.SetTextColor(Color.white);
+            _presenterProvider.InfoPresenter.DisableView();
+            _presenterProvider.GuessPresenter.SetTextColor(Color.white);
             _inputModel.Reset();
         }
 
@@ -70,8 +70,8 @@ namespace Game.Code.States
             }
             
             _inputModel.Reset();
-            _presenterService.InfoPresenter.SetText(text);
-            _presenterService.GuessPresenter.SetTextColor(color);
+            _presenterProvider.InfoPresenter.SetText(text);
+            _presenterProvider.GuessPresenter.SetTextColor(color);
         }
     }
 }

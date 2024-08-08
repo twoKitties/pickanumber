@@ -4,7 +4,7 @@ using Game.Code.Presenters;
 
 namespace Game.Code.Services
 {
-    public class PresenterService : IService, IDisposable
+    public class PresenterProvider : IService, IDisposable
     {
         public InputPresenter InputPresenter { get; private set; }
         public InfoPresenter InfoPresenter { get; private set; }
@@ -14,7 +14,7 @@ namespace Game.Code.Services
         private readonly UIFactory _uiFactory;
         private readonly InputModel _inputModel;
 
-        public PresenterService(UIFactory uiFactory, InputModel inputModel)
+        public PresenterProvider(UIFactory uiFactory, InputModel inputModel)
         {
             _uiFactory = uiFactory;
             _inputModel = inputModel;

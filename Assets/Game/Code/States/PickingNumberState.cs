@@ -7,28 +7,28 @@ namespace Game.Code.States
     {
         private readonly StateMachine _stateMachine;
         private readonly GameStateModel _gameStateModel;
-        private readonly PresenterService _presenterService;
+        private readonly PresenterProvider _presenterProvider;
 
-        public PickingNumberState(StateMachine stateMachine, GameStateModel gameStateModel, PresenterService presenterService)
+        public PickingNumberState(StateMachine stateMachine, GameStateModel gameStateModel, PresenterProvider presenterProvider)
         {
             _stateMachine = stateMachine;
             _gameStateModel = gameStateModel;
-            _presenterService = presenterService;
+            _presenterProvider = presenterProvider;
         }
 
         public void Enter()
         {
             _gameStateModel.Generate();
-            _presenterService.TurnStatusPresenter.EnableView();
-            _presenterService.TurnStatusPresenter.SetText("PICKING A NUMBER");
+            _presenterProvider.TurnStatusPresenter.EnableView();
+            _presenterProvider.TurnStatusPresenter.SetText("PICKING A NUMBER");
 
-            _presenterService.InfoPresenter.EnableView();
-            _presenterService.InfoPresenter.RunWithDelay(() => _stateMachine.EnterState<SelectPlayerState>());
-            _presenterService.InputPresenter.DisableView();
-            _presenterService.StartButtonPresenter.DisableView();
+            _presenterProvider.InfoPresenter.EnableView();
+            _presenterProvider.InfoPresenter.RunWithDelay(() => _stateMachine.EnterState<SelectPlayerState>());
+            _presenterProvider.InputPresenter.DisableView();
+            _presenterProvider.StartButtonPresenter.DisableView();
             
-            _presenterService.GuessPresenter.EnableView();
-            _presenterService.GuessPresenter.SetText("####");
+            _presenterProvider.GuessPresenter.EnableView();
+            _presenterProvider.GuessPresenter.SetText("####");
         }
 
         public void Exit()

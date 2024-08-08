@@ -7,41 +7,41 @@ namespace Game.Code.States
     {
         
         private readonly StateMachine _stateMachine;
-        private readonly PresenterService _presenterService;
+        private readonly PresenterProvider _presenterProvider;
         private int _pick;
 
 
-        public SessionInitializationState(StateMachine stateMachine, PresenterService presenterService)
+        public SessionInitializationState(StateMachine stateMachine, PresenterProvider presenterProvider)
         {
             _stateMachine = stateMachine;
-            _presenterService = presenterService;
+            _presenterProvider = presenterProvider;
         }
 
         public void Enter()
         {
-            _presenterService.Initialize();
-            _presenterService.InfoPresenter.EnableView();
-            _presenterService.InfoPresenter.SetText("PICK A NUMBER");
+            _presenterProvider.Initialize();
+            _presenterProvider.InfoPresenter.EnableView();
+            _presenterProvider.InfoPresenter.SetText("PICK A NUMBER");
             
-            _presenterService.GuessPresenter.EnableView();
-            _presenterService.GuessPresenter.SetText("#$*&");
+            _presenterProvider.GuessPresenter.EnableView();
+            _presenterProvider.GuessPresenter.SetText("#$*&");
 
-            _presenterService.TurnStatusPresenter.DisableView();
-            _presenterService.InputPresenter.DisableView();
+            _presenterProvider.TurnStatusPresenter.DisableView();
+            _presenterProvider.InputPresenter.DisableView();
 
-            _presenterService.StartButtonPresenter.EnableView();
-            _presenterService.StartButtonPresenter.SetText("Start");
-            _presenterService.StartButtonPresenter.onStartClicked += StartGame;
+            _presenterProvider.StartButtonPresenter.EnableView();
+            _presenterProvider.StartButtonPresenter.SetText("Start");
+            _presenterProvider.StartButtonPresenter.onStartClicked += StartGame;
         }
 
         public void Exit()
         {
-            _presenterService.StartButtonPresenter.DisableView();
+            _presenterProvider.StartButtonPresenter.DisableView();
         }
 
         private void StartGame()
         {
-            _presenterService.StartButtonPresenter.onStartClicked -= StartGame;
+            _presenterProvider.StartButtonPresenter.onStartClicked -= StartGame;
             _stateMachine.EnterState<PickingNumberState>();
         }
     }

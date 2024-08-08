@@ -12,12 +12,12 @@ namespace Game.Code.Core
         private readonly HashSet<int> _generatedNumbers;
         private readonly Random _random;
 
-        public Bot(int min, int max, GameStateModel gameStateModel)
+        public Bot(GameStateModel gameStateModel)
         {
-            _min = min;
-            _max = max;
+            _min = gameStateModel.Min;
+            _max = gameStateModel.Max;
             _gameStateModel = gameStateModel;
-            _generatedNumbers = new HashSet<int>(max);
+            _generatedNumbers = new HashSet<int>(_max);
             _random = new Random();
         }
 

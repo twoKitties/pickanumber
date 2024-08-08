@@ -4,6 +4,7 @@ namespace Game.Code.Services
 {
     public class GameStateModel : IService
     {
+        public readonly int Min;
         public readonly int Max;
         public int GuessedNumber { get; private set; }
         public int ClosestMin;
@@ -13,6 +14,7 @@ namespace Game.Code.Services
         public GameStateModel(Random random, int max)
         {
             _random = random;
+            Min = 0;
             Max = max;
             ClosestMin = 0;
             ClosestMax = Max;
