@@ -3,15 +3,14 @@ using Game.Code.Services;
 
 namespace Game.Code.States
 {
-    public class SessionInitializationState : IState
+    public class MenuState : IState
     {
         
         private readonly StateMachine _stateMachine;
         private readonly PresenterProvider _presenterProvider;
-        private int _pick;
 
 
-        public SessionInitializationState(StateMachine stateMachine, PresenterProvider presenterProvider)
+        public MenuState(StateMachine stateMachine, PresenterProvider presenterProvider)
         {
             _stateMachine = stateMachine;
             _presenterProvider = presenterProvider;

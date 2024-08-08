@@ -24,7 +24,7 @@ namespace Game.Code.Core
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(InitializationState)] = new InitializationState(this, new SceneLoader(resourceProvider), resourceProvider, loadingView),
-                [typeof(SessionInitializationState)] = new SessionInitializationState(this, presenterService),
+                [typeof(MenuState)] = new MenuState(this, presenterService),
                 [typeof(PickingNumberState)] = new PickingNumberState(this, modelProvider.GameStateModel, presenterService),
                 [typeof(SelectPlayerState)] = new SelectPlayerState(this, modelProvider.PlayerModel),
                 [typeof(PlayerInputState)] = new PlayerInputState(this, presenterService),

@@ -1,7 +1,4 @@
-﻿using System;
-using Game.Code.Core;
-using Game.Code.Models;
-using Game.Code.Presenters;
+﻿using Game.Code.Core;
 using Game.Code.Services;
 using Game.Code.Views;
 
@@ -38,7 +35,7 @@ namespace Game.Code.States
         private void OnLoaded()
         {
             _loadingView.SetActive(false);
-            _stateMachine.EnterState<SessionInitializationState>();
+            _stateMachine.EnterState<MenuState>();
         }
     }
 }
