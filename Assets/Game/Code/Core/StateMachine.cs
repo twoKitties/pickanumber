@@ -14,7 +14,7 @@ namespace Game.Code.Core
         public StateMachine(LoadingView loadingView)
         {
             var random = new Random(UnityEngine.Random.Range(0, 100));
-            const int max = 9;
+            const int max = 146;
             var resourceProvider = new ResourceProvider();
             var uiFactory = new UIFactory(resourceProvider);
             
