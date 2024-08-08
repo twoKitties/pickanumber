@@ -3,7 +3,7 @@ using Object = UnityEngine.Object;
 
 namespace Game.Code.Services
 {
-    public class UIFactory : IService
+    public class UIFactory
     {
         private readonly IResourceProvider _resourceProvider;
         private HudView _instance;

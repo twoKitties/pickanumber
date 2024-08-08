@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Game.Code.Services
+namespace Game.Code.Models
 {
-    public class GameStateModel : IService
+    public class GameStateModel
     {
         public readonly int Min;
         public readonly int Max;

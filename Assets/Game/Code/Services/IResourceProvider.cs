@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Code.Services
 {
-    public interface IResourceProvider : IService
+    public interface IResourceProvider
     {
         Task Initialize();
         Task LoadSceneAsync(string sceneName);

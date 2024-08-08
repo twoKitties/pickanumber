@@ -4,7 +4,7 @@ using Game.Code.Presenters;
 
 namespace Game.Code.Services
 {
-    public class PresenterProvider : IService, IDisposable
+    public class PresenterProvider
     {
         public InputPresenter InputPresenter { get; private set; }
         public InfoPresenter InfoPresenter { get; private set; }
@@ -30,13 +30,6 @@ namespace Game.Code.Services
             TurnStatusPresenter = new TurnStatusPresenter(_uiFactory.CreateUI().StatusView);
             GuessPresenter = new GuessPresenter(_uiFactory.CreateUI().GuessView, _inputModel);
             GuessPresenter.Initialize();
-        }
-
-        public void Dispose()
-        {
-            InputPresenter?.Dispose();
-            StartButtonPresenter?.Dispose();
-            GuessPresenter.Dispose();
         }
     }
 }

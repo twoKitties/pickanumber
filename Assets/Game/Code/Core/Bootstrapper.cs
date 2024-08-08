@@ -2,7 +2,7 @@ using Game.Code.States;
 using Game.Code.Views;
 using UnityEngine;
 
-namespace Game.Code
+namespace Game.Code.Core
 {
     public class Bootstrapper : MonoBehaviour
     {

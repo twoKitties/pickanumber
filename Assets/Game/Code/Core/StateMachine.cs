@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Code.Models;
 using Game.Code.Services;
 using Game.Code.States;
 using Game.Code.Views;
@@ -18,8 +17,7 @@ namespace Game.Code.Core
             const int max = 9;
             var resourceProvider = new ResourceProvider();
             var uiFactory = new UIFactory(resourceProvider);
-
-
+            
             var modelProvider = new ModelProvider(random, max);
             var presenterService = new PresenterProvider(uiFactory, modelProvider.InputModel);
 

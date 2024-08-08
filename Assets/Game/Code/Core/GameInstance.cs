@@ -1,7 +1,6 @@
-﻿using Game.Code.Core;
-using Game.Code.Views;
+﻿using Game.Code.Views;
 
-namespace Game.Code
+namespace Game.Code.Core
 {
     public class GameInstance
     {

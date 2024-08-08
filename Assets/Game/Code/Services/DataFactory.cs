@@ -1,6 +1,8 @@
-﻿namespace Game.Code.Services
+﻿using Game.Code.Models;
+
+namespace Game.Code.Services
 {
-    public class DataFactory : IService
+    public class DataFactory
     {
         public PlayerModel CreatePlayers()
         {
@@ -25,20 +27,5 @@
                 }
             };
         }
-    }
-
-    public class PlayerModel
-    {
-        public int Count => Data.Length;
-        public PlayerData[] Data;
-        public int ActivePlayerIndex;
-    }
-
-    public class PlayerData
-    {
-        public string Name;
-        public bool IsLocal;
-        public int LastAnswer;
-        public int NumberOfGuesses;
     }
 }
